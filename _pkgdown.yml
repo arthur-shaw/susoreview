@@ -1,0 +1,42 @@
+home:
+  title: Tools for reviewing Survey Solutions interviews
+
+reference:
+- title: "Create attributes"
+- contents:
+- subtitle: "From a single column"
+  contents:
+  - extract_attribute
+  - create_attribute
+- subtitle: "From a several columns"
+  contents:
+  - count_vars
+  - count_list
+  - any_vars
+- subtitle: "From several rows"
+  contents:
+  - count_obs
+  - any_obs
+  - sum_vals
+
+- title: "Create issues"
+- contents:
+  - create_issue
+  - make_issue
+  - make_issue_in_roster
+
+- title: "Execute reject/review workflow"
+- subtitle: "Add issues from interview metadata"
+  contents:
+  - add_issue_if_unanswered
+  - add_issues_for_suso_errors
+- subtitle: "Make decision to approve, review, or reject"
+  contents:
+  - check_for_comments
+  - decide_action
+  - flag_persistent_issues
+- subtitle: "Execute decision rejection decision"
+  contents:
+  - add_rejection_msgs
+  - post_comments
+  - reject_interview

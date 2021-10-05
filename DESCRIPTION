@@ -1,0 +1,28 @@
+Package: susoreview
+Title: Provides Tools for Reviewing Survey Solutions Data and Identifying Issues
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Arthur",
+           family = "Shaw",
+           role = c("aut", "cre"),
+           email = "jashaw2002@gmail.com")
+Description: Provides tools for reviewing Survey Solutions data--creating
+  creating attributes and using those attributes to create issues.
+License: MIT + file LICENSE
+URL: https://github.com/arthur-shaw/susoreview
+BugReports: https://github.com/arthur-shaw/susoreview/issues
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Imports: 
+    dplyr,
+    fuzzyjoin,
+    glue,
+    purrr,
+    rlang,
+    stringr,
+    susoapi (>= 0.1.1),
+    tidyr
+Remotes: 
+    github::arthur-shaw/susoapi
