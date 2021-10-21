@@ -17,6 +17,14 @@ post_comments(
 \item{df_to_reject}{Data frame containing interviews to reject.}
 
 \item{df_issues}{Data frame of issues.}
+
+\item{server}{Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})}
+
+\item{workspace}{Character. Name of the workspace whose questionnaires and associated interviews to get.}
+
+\item{user}{API user name}
+
+\item{password}{API password}
 }
 \value{
 Server-side effect of posting all applicable comments to all applicable questionnaires

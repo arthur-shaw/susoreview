@@ -26,6 +26,14 @@ reject_interview(
 \item{statuses_to_reject}{Numeric vector. Supports values in set c(100, 120, 130).}
 
 \item{reject_hq_approved}{Boolean. Flag that determines whether HeadquartersApproved assignments will be rejected or not. Default behavior is to reject.}
+
+\item{server}{Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})}
+
+\item{workspace}{Character. Name of the workspace whose questionnaires and associated interviews to get.}
+
+\item{user}{API user name}
+
+\item{password}{API password}
 }
 \description{
 Reject interview using the appropriate set of rejection API calls

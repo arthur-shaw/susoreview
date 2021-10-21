@@ -92,6 +92,10 @@ check_for_comments <- function(
 #' @param reject_comment Character. Comment to post upon rejection
 #' @param statuses_to_reject Numeric vector. Supports values in set c(100, 120, 130).
 #' @param reject_hq_approved Boolean. Flag that determines whether HeadquartersApproved assignments will be rejected or not. Default behavior is to reject.
+#' @param server Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})
+#' @param workspace Character. Name of the workspace whose questionnaires and associated interviews to get.
+#' @param user API user name
+#' @param password API password
 #' 
 #' @importFrom susoapi reject_interview_as_sup reject_interview_as_hq unapprove_interview reject_interview_as_hq
 #' @importFrom dplyr if_else
@@ -572,6 +576,10 @@ flag_persistent_issues <- function(
 #' 
 #' @param df_to_reject Data frame containing interviews to reject.
 #' @param df_issues Data frame of issues.
+#' @param server Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})
+#' @param workspace Character. Name of the workspace whose questionnaires and associated interviews to get.
+#' @param user API user name
+#' @param password API password
 #' 
 #' @return Server-side effect of posting all applicable comments to all applicable questionnaires
 #' 
