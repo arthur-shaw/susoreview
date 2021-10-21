@@ -236,7 +236,7 @@ add_issues_for_suso_errors <- function(
         dplyr::select(
             .data$interview__id, .data$interview__key, 
             .data$issue_vars, .data$issue_type, .data$issue_desc, 
-            .data$issue_comment, .data$issue_oc
+            .data$issue_comment, .data$issue_loc
         )
 
     all_issues <- dplyr::bind_rows(df_issues, errors_as_issues)
