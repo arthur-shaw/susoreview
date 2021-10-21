@@ -17,7 +17,7 @@ count_vars(
 
 \item{var_pattern}{Character Regular expression used to select variables to be counted.}
 
-\item{var_val}{Numeric. Value to count in columns identified by \code{var_pattern}.}
+\item{var_val}{Numeric. Value(s) to count in columns identified by \code{var_pattern}.}
 
 \item{attrib_name}{Character. Name of attribute.}
 

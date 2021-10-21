@@ -11,7 +11,7 @@ any_vars(df, var_pattern, var_val = 1, attrib_name, attrib_vars = var_pattern)
 
 \item{var_pattern}{Character Regular expression used to select variables to be counted.}
 
-\item{var_val}{Numeric. Value to count in columns identified by \code{var_pattern}.}
+\item{var_val}{Numeric. Value(s) to count in columns identified by \code{var_pattern}.}
 
 \item{attrib_name}{Character. Name to give the attribute in the issues data file}
 

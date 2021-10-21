@@ -78,7 +78,7 @@ create_attribute <- function(
 #' 
 #' @param df Data frame. Household-level microdata that contains the variables to count.
 #' @param var_pattern Character Regular expression used to select variables to be counted.
-#' @param var_val Numeric. Value to count in columns identified by `var_pattern`.
+#' @param var_val Numeric. Value(s) to count in columns identified by `var_pattern`.
 #' @param attrib_name Character. Name of attribute.
 #' @param attrib_vars Character. Regular expression that identifies the variable(s) in `var_pattern`.
 #' 
@@ -105,7 +105,7 @@ count_vars <- function(
             # mark all columns with `var_val` as TRUE; otherwise, FALSE
             dplyr::across(
                 .cols = dplyr::matches(var_pattern),
-                .fns = ~ .x == var_val
+                .fns = ~ .x %in% var_val
             ),
             attrib_val = rowSums(
                 dplyr::select(., dplyr::matches(var_pattern)),
@@ -130,7 +130,7 @@ count_vars <- function(
 #' 
 #' @param df Data frame. Household-level microdata that contains the attribute to extract.
 #' @param var_pattern Character Regular expression used to select variables to be counted.
-#' @param var_val Numeric. Value to count in columns identified by `var_pattern`.
+#' @param var_val Numeric. Value(s) to count in columns identified by `var_pattern`.
 #' @param attrib_name Character. Name to give the attribute in the issues data file
 #' @param attrib_vars Character. Regular expression that identifies the variable in `var`.
 #' 
@@ -154,11 +154,11 @@ any_vars <- function(
             # mark all columns with `var_val` as TRUE; otherwise, FALSE
             dplyr::across(
                 .cols = dplyr::matches(var_pattern),
-                .fns = ~ .data$.x == var_val
+                .fns = ~ .data$.x %in% var_val
             ),
             attrib_val = dplyr::if_any(
                 .cols = dplyr::matches(var_pattern),
-                .fns = .data$.x == var_val
+                .fns = .data$.x == TRUE
             ),
             attrib_name = attrib_name,
             attrib_vars = attrib_vars
