@@ -158,7 +158,7 @@ any_vars <- function(
             ),
             attrib_val = dplyr::if_any(
                 .cols = dplyr::matches(var_pattern),
-                .fns = .data$.x == TRUE
+                .fns = ~ .data$.x == TRUE
             ),
             attrib_name = attrib_name,
             attrib_vars = attrib_vars
