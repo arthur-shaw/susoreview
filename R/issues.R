@@ -37,6 +37,23 @@ create_issue <- function(
     df <- df_attribs %>%
         dplyr::filter(.data$attrib_name %in% vars)
 
+    # if no attributes found, return a 0-row tibble with expected columns
+    if (nrow(df) == 0) {
+
+    df_issues <- tibble::tibble(
+        interview__id = NA_character_,
+        interview__key = NA_character_,
+        issue_type = NA_real_,
+        issue_desc = NA_character_,
+        issue_comment = NA_character_,
+        issue_vars = NA_character_,
+        issue_loc = NA_character_,
+        .rows = 0
+    )  
+
+    # if attributes found, return a tibble with a row for each issue 
+    } else {
+
     # convert data from long to wide format
     # so that columns can be compared in `where`
     df_wide <- tidyr::pivot_wider(
@@ -84,6 +101,8 @@ create_issue <- function(
             .data$issue_type, .data$issue_desc, .data$issue_comment, 
             .data$issue_vars, .data$issue_loc
         )
+
+    }
 
     return(df_issues)
 

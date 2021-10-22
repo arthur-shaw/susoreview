@@ -23,6 +23,7 @@ Imports:
     rlang,
     stringr,
     susoapi (>= 0.1.1),
+    tibble,
     tidyr
 Remotes: 
     github::arthur-shaw/susoapi
