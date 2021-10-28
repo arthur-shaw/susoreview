@@ -150,15 +150,9 @@ any_vars <- function(
 
     df_attribs <- df %>%
         dplyr::mutate(
-            # so that rowSum counts columns with the desired value,
-            # mark all columns with `var_val` as TRUE; otherwise, FALSE
-            dplyr::across(
-                .cols = dplyr::matches(var_pattern),
-                .fns = ~ .data$.x %in% var_val
-            ),
             attrib_val = dplyr::if_any(
                 .cols = dplyr::matches(var_pattern),
-                .fns = .data$.x == TRUE
+                .fns = ~ .x %in% var_val
             ),
             attrib_name = attrib_name,
             attrib_vars = attrib_vars
