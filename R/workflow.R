@@ -367,7 +367,7 @@ decide_action <- function(
         # has at least 1 major issue, but no comments
         dplyr::anti_join(df_has_comments, by = c("interview__id", "interview__key")) %>%
         dplyr::inner_join(df_cases_to_review, by = c("interview__id", "interview__key")) %>%
-        dplyr::select(.data$interview__id, .data$interview__key, interview__status)
+        dplyr::select(.data$interview__id, .data$interview__key, .data$interview__status)
 
     # =============================================================================
     # Review
@@ -384,7 +384,7 @@ decide_action <- function(
         # but is not on the rejection list
         dplyr::anti_join(to_reject, by = c("interview__id", "interview__key")) %>%
         dplyr::inner_join(df_cases_to_review, by = c("interview__id", "interview__key")) %>%
-        dplyr::select(.data$interview__id, .data$interview__key, interview__status)
+        dplyr::select(.data$interview__id, .data$interview__key, .data$interview__status)
 
     # =============================================================================
     # Approve
@@ -395,7 +395,7 @@ decide_action <- function(
         dplyr::inner_join(interview_has_no_error_or_comment, by = c("interview__id", "interview__key")) %>%
         dplyr::anti_join(interviews_have_issues, by = c("interview__id", "interview__key")) %>%
         dplyr::inner_join(df_cases_to_review, by = c("interview__id", "interview__key")) %>%
-        dplyr::select(.data$interview__id, .data$interview__key, interview__status)        
+        dplyr::select(.data$interview__id, .data$interview__key, .data$interview__status)        
 
     # =============================================================================
     # Return a data frame for each recommendation
