@@ -74,11 +74,9 @@ check_for_comments <- function(
         by = "interview__id"    
     )
 
-    interviews_have_comments <- dplyr::semi_join(
-        df_cases_to_review, 
-        interviews_with_comments, 
-        by = "interview__id"
-    )
+    interviews_have_comments <- df_cases_to_review %>%
+        dplyr::semi_join(interviews_with_comments, by = "interview__id") %>%
+        dplyr::select(.data$interview__id, .data$interview__key)
 
     return(interviews_have_comments)
 
@@ -302,7 +300,7 @@ add_issue_if_unanswered <- function(
             issue_loc = "",
             issue_vars = "",
         ) %>%
-        dplyr::select(.data$interview__id, .data$interview__key, dplyr::starts_with("issue"))
+        dplyr::select(.data$interview__id, .data$interview__key, dplyr::starts_with("issue_"))
 
     # add the issue entry to the issues data frame
     issues_updated <- dplyr::bind_rows(df_issues, int_complete_but_q_unanswered)
