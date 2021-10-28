@@ -263,7 +263,7 @@ add_issues_for_suso_errors <- function(
 #' @return Data frame. Issues data frame with new record for interviews with too many questions left unanswered.
 #' 
 #' @importFrom dplyr `%>%` filter select left_join mutate bind_rows starts_with
-#' @importFrom rlang enexpr .data
+#' @importFrom rlang quo .data
 #' 
 #' @export 
 add_issue_if_unanswered <- function(
@@ -278,7 +278,7 @@ add_issue_if_unanswered <- function(
 ) {
 
     # issue_comment defuse expression for later evaluation
-    issue_comment_expr <- rlang::enexpr(issue_comment)
+    issue_comment_expr <- rlang::enquo(issue_comment)
 
     # identify completed interviews
     completed_interviews <- df_cases_to_review %>%
