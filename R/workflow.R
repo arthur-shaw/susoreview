@@ -443,7 +443,7 @@ add_rejection_msgs <- function(
         # preserve interview__status for rejection
         dplyr::group_by(.data$interview__id) %>%
         dplyr::summarise(    
-            reject_message = paste(.data$issue_comment, collapse = " \n"),
+            reject_comment = paste(.data$issue_comment, collapse = " \n"),
             interview__status = dplyr::first(.data$interview__status)
         ) %>%
         dplyr::ungroup()
@@ -515,7 +515,7 @@ flag_persistent_issues <- function(
         # use system date as rejection date
         dplyr::mutate(date = Sys.Date()) %>%
         # rename error message column to match interview__comments
-        dplyr::rename(comment = .data$reject_message) %>%
+        dplyr::rename(comment = .data$reject_comment) %>%
         # expand data set to the error level, where separators are newline characters
         tidyr::separate_rows(.data$comment, sep = " \\n ") %>%
         dplyr::mutate(comment = as.character(.data$comment)) %>%
@@ -553,7 +553,8 @@ flag_persistent_issues <- function(
             reject_messages_repeated, 
             by = c("interview__id", "comment")
         ) %>%
-        select(.data$interview__id, .data$date, .data$comment)
+        dplyr::rename(reject_comment = .data$comment) %>%
+        select(.data$interview__id, .data$date, .data$reject_comment)
 
     # =============================================================================
     # Remove issues interviews with persistent problems for rejection list
@@ -606,7 +607,7 @@ post_comments <- function(
 
     # identify comments to post
     comments_to_post <- df_to_reject %>%
-        dplyr::left_join(df_issues, by = "interview__id") %>%
+        dplyr::left_join(df_issues, by = c("interview__id", "interview__key")) %>%
         dplyr::filter(.data$issue_type == 2) %>%
         dplyr::select(
             .data$interview__id, 
