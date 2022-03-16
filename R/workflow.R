@@ -609,6 +609,8 @@ post_comments <- function(
     comments_to_post <- df_to_reject %>%
         dplyr::left_join(df_issues, by = c("interview__id", "interview__key")) %>%
         dplyr::filter(.data$issue_type == 2) %>%
+        # convert all attributes to character for correct downstream handling
+        dplyr::mutate(
         dplyr::select(
             .data$interview__id, 
             variable_name = .data$issue_vars, 
@@ -622,6 +624,7 @@ post_comments <- function(
             .l = comments_to_post,
             .f = comment_question,
             server = server,
+            workspace = workspace,
             user = user,
             password = password
         )
