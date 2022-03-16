@@ -622,7 +622,7 @@ post_comments <- function(
     if (nrow(comments_to_post) > 0) {
         purrr::pwalk(
             .l = comments_to_post,
-            .f = comment_question,
+            .f = susoapi::comment_question,
             server = server,
             workspace = workspace,
             user = user,
