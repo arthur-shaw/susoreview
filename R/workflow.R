@@ -616,10 +616,11 @@ post_comments <- function(
                 .fns = ~ as.character(.x)
             )      
         ) %>%
+        # retain attributes needed for comments and rename to match argument names
         dplyr::select(
-            .data$interview__id, 
+            interview_id = .data$interview__id, 
             variable_name = .data$issue_vars, 
-            row_number = .data$issue_loc, 
+            roster_vector = .data$issue_loc, 
             comment = .data$issue_comment
         )
 
