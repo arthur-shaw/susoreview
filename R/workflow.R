@@ -611,6 +611,11 @@ post_comments <- function(
         dplyr::filter(.data$issue_type == 2) %>%
         # convert all attributes to character for correct downstream handling
         dplyr::mutate(
+            dplyr::across(
+                .cols = dplyr::everything(),
+                .fns = ~ as.character(.x)
+            )      
+        ) %>%
         dplyr::select(
             .data$interview__id, 
             variable_name = .data$issue_vars, 
