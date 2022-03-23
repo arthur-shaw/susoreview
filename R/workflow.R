@@ -291,7 +291,7 @@ add_issue_if_unanswered <- function(
         # if no legit missing dset specified, carry forward data frame; otherwise, merge it
         {if (is.null(df_legit_miss)) . else dplyr::left_join(., df_legit_miss, by = c("interview__id", "interview__key"))} %>%
         # if legit missing dset specified, filter to those with unanswereds more than overall threshold; otherwise, use interview-specific threshold
-        {if (is.null(df_legit_miss)) dplyr::filter(., .data$NotAnswered > n_unanswered_ok) else dplyr::filter(., .data$NotAnswered > (.data$n_unanswered_ok + .data$n_legit_miss))} %>%
+        {if (is.null(df_legit_miss)) dplyr::filter(., .data$NotAnswered > n_unanswered_ok) else dplyr::filter(., .data$NotAnswered > (n_unanswered_ok + .data$n_legit_miss))} %>%
         # create an issue entry for excess unanswered questions
         dplyr::mutate(
             issue_type = issue_type,
