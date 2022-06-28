@@ -97,7 +97,7 @@ check_for_comments <- function(
 #' 
 #' @importFrom susoapi reject_interview_as_sup reject_interview_as_hq unapprove_interview reject_interview_as_hq
 #' @importFrom dplyr if_else
-#' @importFrom glue glue
+#' @importFrom glue glue glue_collapse
 #' 
 #' @export 
 reject_interview <- function(
@@ -107,7 +107,7 @@ reject_interview <- function(
     statuses_to_reject = c(100, 120),
     reject_hq_approved = TRUE,
     server = Sys.getenv("SUSO_SERVER"),     # full server address
-    workspace = "primary",
+    workspace = Sys.getenv("SUSO_WORKSPACE"),
     user = Sys.getenv("SUSO_USER"),         # API user name
     password = Sys.getenv("SUSO_PASSWORD")  # API password       
 ) {
@@ -600,7 +600,7 @@ post_comments <- function(
     df_to_reject,
     df_issues,
     server = Sys.getenv("SUSO_SERVER"),     # full server address
-    workspace = "primary",
+    workspace = Sys.getenv("SUSO_WORKSPACE"),
     user = Sys.getenv("SUSO_USER"),         # API user name
     password = Sys.getenv("SUSO_PASSWORD")  # API password      
 ) {
