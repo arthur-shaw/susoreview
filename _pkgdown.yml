@@ -3,7 +3,6 @@ home:
 
 reference:
 - title: "Create attributes"
-- contents:
 - subtitle: "From a single column"
   contents:
   - extract_attribute
@@ -40,3 +39,4 @@ reference:
   - add_rejection_msgs
   - post_comments
   - reject_interview
+  - approve_interview
