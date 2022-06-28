@@ -189,6 +189,88 @@ reject_interview <- function(
 
 }
 
+#' Approve interviews using the appropriate set of API calls
+#' 
+#' @param interview__id Character. GUID for interview found in `interview__id`.
+#' @param interview__status Numeric. Supports values in set c(100, 120).
+#' @param approve_comment Character. Comment to post upon rejection
+#' @param statuses_to_approve Numeric vector. Supports values in set c(100, 120).
+#' @param server Full server web address (e.g., \code{https://demo.mysurvey.solutions}, \code{https://my.domain})
+#' @param workspace Character. Name of the workspace whose questionnaires and associated interviews to get.
+#' @param user API user name
+#' @param password API password
+#' 
+#' @importFrom susoapi approve_interview_as_sup approve_interview_as_hq
+#' @importFrom dplyr if_else
+#' @importFrom glue glue glue_collapse
+#' 
+#' @export 
+approve_interview <- function(
+    interview__id,
+    interview__status,
+    approve_comment,
+    statuses_to_approve = c(120),
+    server = Sys.getenv("SUSO_SERVER"), 
+    workspace = Sys.getenv("SUSO_WORKSPACE"), 
+    user = Sys.getenv("SUSO_USER"), 
+    password = Sys.getenv("SUSO_PASSWORD") 
+) {
+
+    # only cases
+    if (interview__status %in% statuses_to_approve) {
+
+        # Completed (100)
+        if (interview__status == 100 & (100 %in% statuses_to_approve)) {
+
+            # first, approve as supervisor
+            susoapi::approve_interview_as_sup(
+                interview_id = interview__id, 
+                comment = approve_comment,
+                server = server,
+                workspace = workspace,
+                user = user,
+                password = password
+            )
+
+            # then, approve as HQ
+            susoapi::approve_interview_as_hq(
+                interview_id = interview__id, 
+                comment = approve_comment,
+                server = server,
+                workspace = workspace,
+                user = user,
+                password = password
+            )
+
+        # ApprovedBySupervisor (120)
+        } else if (interview__status == 120 & (120 %in% statuses_to_approve)) {
+
+            susoapi::approve_interview_as_hq(
+                interview_id = interview__id, 
+                comment = approve_comment,
+                server = server,
+                workspace = workspace,
+                user = user,
+                password = password
+            )
+
+        }
+
+    } else {
+
+        status_list <- glue::glue_collapse(x = statuses_to_approve, sep = ", ", last = " and ")
+        is_are <- dplyr::if_else(length(statuses_to_approve) > 1, "are", "is")
+
+        message(glue::glue(
+            "Interview {interview__id} not approved.",
+            "The interview's status is {interview__status}, but only {status_list} {is_are} specified in `statuses_to_approve`",
+            .sep = "\n"
+        ))
+
+    }
+
+}
+
 #' Add an issue for each SuSo validation error
 #' 
 #' First, transform SuSo validations from `interview__errors` into issues of the type indicated in `issue_type`. 
