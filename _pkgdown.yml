@@ -1,3 +1,10 @@
+url: https://arthur-shaw.github.io/susoreview
+template:
+  bootstrap: 5
+
+development:
+  mode: auto
+
 home:
   title: Tools for reviewing Survey Solutions interviews
 
