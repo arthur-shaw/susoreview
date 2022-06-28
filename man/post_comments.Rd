@@ -8,7 +8,7 @@ post_comments(
   df_to_reject,
   df_issues,
   server = Sys.getenv("SUSO_SERVER"),
-  workspace = "primary",
+  workspace = Sys.getenv("SUSO_WORKSPACE"),
   user = Sys.getenv("SUSO_USER"),
   password = Sys.getenv("SUSO_PASSWORD")
 )
