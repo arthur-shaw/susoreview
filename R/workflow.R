@@ -121,7 +121,7 @@ reject_interview <- function(
     if (interview__status %in% statuses_to_reject) {
 
         # Completed
-        if (interview__status == 100) {
+        if (interview__status == 100 & (100 %in% statuses_to_reject)) {
             susoapi::reject_interview_as_sup(
                 interview_id = interview__id, 
                 comment = reject_comment,
@@ -131,7 +131,7 @@ reject_interview <- function(
                 password = password
             )
         # ApprovedBySupervisor
-        } else if (interview__status == 120) {
+        } else if (interview__status == 120 & (120 %in% statuses_to_reject)) {
             susoapi::reject_interview_as_hq(
                 interview_id = interview__id, 
                 comment = reject_comment,
@@ -141,7 +141,7 @@ reject_interview <- function(
                 password = password
             )
         # ApprovedByHeadquarters
-        } else if (interview__status == 130) {
+        } else if (interview__status == 130 & (130 %in% statuses_to_reject)) {
             if (reject_hq_approved == TRUE) {
                 # first, unapprove
                 susoapi::unapprove_interview(
